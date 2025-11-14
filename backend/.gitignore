@@ -1,0 +1,41 @@
+Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+Environment Variables
+.env
+.env.local
+.env.*.local
+
+Logs
+logs/
+*.log
+.log.
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+Build output
+dist/
+build/
+
+Cache
+.cache/
+.tmp/
+
+OS / Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+Mongoose / MongoDB
+dump/
+*.bson
+*.swp
+
+Testing
+coverage/
