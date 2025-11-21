@@ -29,6 +29,7 @@ app.get('/', (req, res) => {
 
 //  Montar las rutas de productos
 app.use('/api/products', productsRouter)
+// app.use('/api/users', productsRouter)
 
 //  Conexión a MongoDB
 mongoose

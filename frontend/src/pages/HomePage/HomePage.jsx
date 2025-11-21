@@ -1,9 +1,19 @@
 import React from "react";
-import { HomeSection } from "./HomeSection.jsx";
+import { HomeNav } from "./HomeNav.jsx";
+import { HomeCarousel } from "./HomeCarousel.jsx";
+import { HomeCategories } from "./HomeCategories.jsx";
+import { HomeNews } from "./HomeNews.jsx";
+import { HomeFooter } from "./HomeFooter.jsx";
 
 export const HomePage = () => {
     return (
-        <HomeSection />
+        <>
+            <HomeNav />
+            <HomeCarousel />
+            <HomeCategories />
+            <HomeNews />
+            <HomeFooter />
+        </>
     )
 }
 

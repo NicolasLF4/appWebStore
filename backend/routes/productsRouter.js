@@ -6,6 +6,7 @@ import {
   getOneProduct,
   updateProduct
 } from '../controller/productController.js'
+
 const productsRouter = Router()
 //ABMC | CRUD
 
