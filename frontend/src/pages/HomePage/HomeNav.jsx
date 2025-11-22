@@ -3,10 +3,12 @@ import '../../styles/HomeNav.css'
 import { UserRound } from 'lucide-react';
 import { ShoppingCart } from 'lucide-react';
 import { Heart } from 'lucide-react';
+import { HamburgerMenu } from "../../components/HamburgerMenu";
 
 export const HomeNav = () => {
     return (
         <nav>
+            <HamburgerMenu />
             <div className="nav-container">
                 {/* Marca o logo */}
                 <a href="/" className="logo">
