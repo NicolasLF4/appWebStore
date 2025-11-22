@@ -9,9 +9,9 @@ export const HamburgerMenu = () => {
     const [visible, setVisible] = useState(false)
     
     return (
-        <div className="hamburger-menu">
+        <div>
 
-            <button onClick={() => setVisible(!visible)}>
+            <button className="hamburger-menu" onClick={() => setVisible(!visible)}>
                 {visible 
                     ? <X size={24} color="#574837"/>
                     : <Menu size={24} color="#574837"/>
@@ -19,6 +19,8 @@ export const HamburgerMenu = () => {
             </button>
 
             {visible
+                ? <div className="toggle-menu"></div>
+                : null
             }
         </div>
     )
