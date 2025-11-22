@@ -1,78 +1,56 @@
 nav {
-    /* position: relative; */
+    position: relative;
     display: flex;
     width: 100%;
-    height: 10%;
-    justify-content: space-between;
+    height: 10vh;
+    justify-content: center;
     align-items: center;
-    background-color: #191919;
+    /* background-color: #b3b094; */
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
 }
 
 .logo {
     display: inline-block;
-    margin: 0px 0px 0px 25px 
+    margin: 0px 20px 0px 20px 
 }
-.nav-links{
-    list-style: none;
-    /* background-color:darkslategray; */
-    padding: 0px;
+
+.nav-container {
     display: flex;
-    width: 38%;
+    width: 80%;
     height: 100%;
-    justify-content:space-evenly;
+    justify-content: space-between;
     align-items: center;
-}
-nav > ul {
-    display: flex;
-    gap: 20px
-}
-.item {
-    position: relative;
-    cursor: pointer;
-    /* background-color: chocolate; */
-    padding: 10px;
-}
-.submenu {
-    list-style: none;
-    position: absolute;
-    top: 100%;
-    display: none;
-    background: rgb(0, 0, 0);
-    min-width: 160px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin:0px;
-    padding: 0px;
-}
-.submenu li {
-    padding: 5px 15px;
-    white-space: nowrap;
-}
-.submenu li:hover {
-    background: #747bff;
-}
-.item:hover .submenu {
-    display: block;
+    /* background-color: #574837; */
 }
 
 input {
     width: 100%;
-    height: 25px;
+    margin: 0px 20px 0px 20px;
+    height: 30px;
     border-radius: 10px;
+    background-color: rgba(87,72,55,0.1);
+    border: hidden;
 }
 
 .icons {
-    width: 30%;
-    padding-right: 10px;
+    /* width: 30%; */
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    margin: 0px 20px 0px 20px;
     /* background-color: blueviolet; */
-    margin-right: 10px;
 }
 
 .cart-icon,
 .user-icon,
 .heart-icon {
-    margin-left: 10px;
+    margin: 0px 10px 0px 10px;
     cursor: pointer;
+    color:  #574837;
+}
+
+/*  HAMBURGUERMENU  */
+
+.hamburger-menu {
+    cursor: auto;
 }
