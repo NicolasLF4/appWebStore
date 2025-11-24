@@ -10,6 +10,8 @@ nav {
 }
 
 .logo {
+    color:  #574837;
+    text-decoration: inherit;
     display: inline-block;
     margin: 0px 20px 0px 20px 
 }
@@ -30,7 +32,9 @@ input {
     height: 30px;
     border-radius: 10px;
     background-color: rgba(87,72,55,0.1);
-    border: hidden;
+    border: 0;
+    outline: none;
+    padding: 0px 0px 0px 20px;
 }
 
 .icons {
@@ -65,8 +69,15 @@ input {
     position: absolute;
     height: 90vh;
     background-image:linear-gradient(to bottom right, white, rgb(212,184,149) 200%);
-    width: 30%;
+    width: 25%;
     top: 10vh;
     z-index: 1;
     box-shadow: 10px 8px 16px -6px rgba(0, 0, 0, 0.2);
+}
+.item {
+    color: #574837;
+    list-style: none;
+}
+.submenu {
+    list-style: none;
 }

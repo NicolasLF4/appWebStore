@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { Menu } from "lucide-react";
 import { X } from "lucide-react";
-import '../styles/HomeNav.css'
+import styles from '../styles/HomeNav.module.css';
 
 export const HamburgerMenu = () => {
     
@@ -11,7 +11,7 @@ export const HamburgerMenu = () => {
     return (
         <div>
 
-            <button className="hamburger-menu" onClick={() => setVisible(!visible)}>
+            <button className={ styles["hamburger-menu"] } onClick={() => setVisible(!visible)}>
                 {visible 
                     ? <X size={24} color="#574837"/>
                     : <Menu size={24} color="#574837"/>
@@ -19,7 +19,33 @@ export const HamburgerMenu = () => {
             </button>
 
             {visible
-                ? <div className="toggle-menu"></div>
+                ? <div className={ styles["toggle-menu"] }>
+                    <ul className={ styles["nav-links"] }>
+                        {/* Ofertas */}
+                        <li className={ styles.item }>Ofertas</li>
+                        {/* Productos */}
+                        <li className={ styles.item }>
+                            Productos
+                            <ul className={ styles.submenu }>
+                                <li>Zapatillas</li>
+                                <li>Pantalones</li>
+                                <li>Remeras</li>
+                                <li>Abrigos</li>
+                            </ul>
+                        </li>
+                        {/* Categorias */}
+                        <li className={ styles.item }>
+                            Categorias
+                            <ul className={ styles.submenu }>
+                                <li>Hombres</li>
+                                <li>Mujeres</li>
+                                <li>Niños</li>
+                            </ul>
+                        </li>
+                        {/* Contacto */}
+                        <li className={ styles.item }>Contacto</li>
+                    </ul>
+                </div>
                 : null
             }
         </div>
