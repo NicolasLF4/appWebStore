@@ -1,10 +1,10 @@
 import React from "react";
 import {CategoriesCard}  from "../../components/CategoriesCard.jsx";
 import styles from "../../styles/HomeCategories.module.css"
-import streatware from "../../assets/streatware.jpg";
-import casual from "../../assets/casual.jpg";
-import vintage from "../../assets/vintage.jpg";
-import sport from "../../assets/sport.jpg";
+import streatware from "../../assets/categories/streatware.jpg";
+import casual from "../../assets/categories/casual.jpg";
+import vintage from "../../assets/categories/vintage.jpg";
+import sport from "../../assets/categories/sport.jpg";
 
 
 export const HomeCategories = () => {

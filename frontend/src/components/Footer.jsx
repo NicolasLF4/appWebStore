@@ -1,5 +1,5 @@
 import React from "react";
-import styles from '../../styles/HomeFooter.module.css';
+import styles from '../styles/HomeFooter.module.css';
 import { Instagram } from 'lucide-react';
 import { Github } from 'lucide-react';
 

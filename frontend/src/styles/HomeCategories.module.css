@@ -3,9 +3,10 @@
     justify-content: space-around;
     height: 200px;
     width: 70%;
-    top: -200px;
+    top: -225px;
     justify-self: center;
     display: flex;
+    margin-bottom: 100px;
     /* background-color: aquamarine; */
 }
 .card {
