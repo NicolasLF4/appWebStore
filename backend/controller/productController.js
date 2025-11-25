@@ -7,7 +7,7 @@ export const getOneProduct = async (req, res) => {
     const producto = await ps.getOne(req.params.id)
     res.send(producto)
   } catch (error) {
-    //devolvemos error500: error servidor
+    res.status(500).send(error)
   }
 }
 
