@@ -1,5 +1,5 @@
 import React from "react";
-import '../../styles/HomeNav.css'
+import "../styles/HomeNav.css";
 import { UserRound } from 'lucide-react';
 import { ShoppingCart } from 'lucide-react';
 import { Heart } from 'lucide-react';
