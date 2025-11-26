@@ -1,6 +1,5 @@
 :root {
   --bs-body-font-family: Georgia, 'Times New Roman', Times, serif
-  
 }
 
 a {
@@ -18,17 +17,4 @@ body {
   width: 100%;
   overflow-x: hidden;
   background-image:linear-gradient(to bottom right, white, rgb(212,184,149));
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }
