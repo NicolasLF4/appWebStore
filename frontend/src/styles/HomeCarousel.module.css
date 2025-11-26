@@ -1,0 +1,26 @@
+.item {
+    height: 300px;
+    width: 100%;
+}
+.item1 {
+    /* height: 300px; */
+    /* width: 100%; */
+    position: relative;
+}
+
+.item1 img {
+    /* position: absolute; */
+    height: 450px;
+    width: 100%;
+    display: block;
+    mask-image: linear-gradient(
+      to bottom,
+      black 55%,
+      transparent 75%
+    );
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      black 55%,
+      transparent 75%
+    );
+}
