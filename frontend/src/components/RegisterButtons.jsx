@@ -1,13 +1,13 @@
 import { useState, useImperativeHandle, forwardRef } from "react";
 import styles from '../styles/AuthModal.module.css';
 import { X } from 'lucide-react';
-import { LoginForm } from '../pages/Login';
+import { RegisterForm } from '../pages/Register';
 
-// Componente que maneja la visualización del modal de login
+// Componente que maneja la visualización del modal de registro
 // isLogin: si es true, no muestra nada (usuario ya logueado)
-// trigger: elemento personalizado que abre el modal (ej: ícono de usuario)
-// onOpenRegister: función para abrir el modal de registro
-export const AuthButtons = forwardRef(function AuthButtons({ isLogin, trigger, onOpenRegister }, ref) {
+// trigger: elemento personalizado que abre el modal
+// onOpenLogin: función para abrir el modal de login
+export const RegisterButtons = forwardRef(function RegisterButtons({ isLogin, trigger, onOpenLogin }, ref) {
   // Estado para controlar si el modal está abierto o cerrado
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -26,21 +26,21 @@ export const AuthButtons = forwardRef(function AuthButtons({ isLogin, trigger, o
     setIsModalOpen(false);
   };
 
-  // Función para cambiar al modal de registro
-  const handleSwitchToRegister = () => {
-    handleCloseModal(); // Cierra el modal de login
-    if (onOpenRegister) {
+  // Función para cambiar al modal de login
+  const handleSwitchToLogin = () => {
+    handleCloseModal(); // Cierra el modal de registro
+    if (onOpenLogin) {
       // Espera un momento para que el modal se cierre antes de abrir el otro
       setTimeout(() => {
-        onOpenRegister();
+        onOpenLogin();
       }, 300);
     }
   };
 
-  // Callback que se ejecuta cuando el login es exitoso
-  const handleLoginSuccess = (data) => {
+  // Callback que se ejecuta cuando el registro es exitoso
+  const handleRegisterSuccess = (data) => {
     // Aquí puedes guardar datos en contexto, localStorage, etc.
-    console.log("Login exitoso:", data);
+    console.log("Registro exitoso:", data);
   };
 
   // Si el usuario ya está logueado, no muestra nada
@@ -56,7 +56,7 @@ export const AuthButtons = forwardRef(function AuthButtons({ isLogin, trigger, o
     </div>
   ) : (
     <button onClick={handleOpenModal} className={styles["open-button"]}>
-      Iniciar Sesión
+      Registrarse
     </button>
   );
 
@@ -78,11 +78,11 @@ export const AuthButtons = forwardRef(function AuthButtons({ isLogin, trigger, o
               <X size={24} />
             </button>
             
-            {/* Formulario de login con la lógica del login */}
-            <LoginForm 
-              onSuccess={handleLoginSuccess} 
+            {/* Formulario de registro con la lógica del registro */}
+            <RegisterForm 
+              onSuccess={handleRegisterSuccess} 
               onClose={handleCloseModal}
-              onSwitchToRegister={handleSwitchToRegister}
+              onSwitchToLogin={handleSwitchToLogin}
             />
           </div>
         </div>
@@ -90,3 +90,4 @@ export const AuthButtons = forwardRef(function AuthButtons({ isLogin, trigger, o
     </>
   );
 });
+
