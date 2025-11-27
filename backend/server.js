@@ -3,6 +3,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 import productsRouter from './routes/productsRouter.js'
+import authRouter from './routes/authRouter.js'
 
 dotenv.config()
 const app = express()
@@ -29,15 +30,22 @@ app.get('/', (req, res) => {
 
 //  Montar las rutas de productos
 app.use('/api/products', productsRouter)
-// app.use('/api/users', productsRouter)
 
-//  Conexión a MongoDB
-mongoose
-  .connect(process.env.MONGOURL)
-  .then(() => {
-    console.log('Conectado a MongoDB en: ' + process.env.MONGOURL)
-    app.listen(PORT, () =>
-      console.log(`Servidor corriendo en el puerto http://localhost:${PORT}`)
-    )
-  })
-  .catch(err => console.error(' Error de conexión a MongoDB:', err.message))
+//  Montar las rutas de autenticación
+app.use('/auth', authRouter)
+
+//  Iniciar el servidor
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en el puerto http://localhost:${PORT}`)
+  
+  //  Conexión a MongoDB
+  mongoose
+    .connect(process.env.MONGOURL)
+    .then(() => {
+      console.log('Conectado a MongoDB en: ' + process.env.MONGOURL)
+    })
+    .catch(err => {
+      console.error('Error de conexión a MongoDB:', err.message)
+      console.log('El servidor está corriendo pero sin conexión a la base de datos')
+    })
+})
