@@ -1,130 +1,131 @@
 import { useState } from "react";
 import styles from '../styles/AuthModal.module.css';
 
-// Componente que contiene toda la lógica del formulario de registro
-// Recibe callbacks para manejar el éxito del registro y cerrar el modal
-// onSwitchToLogin: función para cambiar al modal de login
 export function RegisterForm({ onSuccess, onClose, onSwitchToLogin }) {
-  // Estados para manejar los valores del formulario y errores
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
+  });
   const [error, setError] = useState("");
 
-  // Función que maneja el envío del formulario
-  const handleSubmit = async (e) => {
-    e.preventDefault(); // Previene el comportamiento por defecto del formulario
-    setError(""); // Limpia errores previos
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-    // Validación: verifica que las contraseñas coincidan
-    if (password !== confirmPassword) {
+  const validateForm = () => {
+    if (formData.password !== formData.confirmPassword) {
       setError("Las contraseñas no coinciden");
-      return;
+      return false;
     }
-
-    // Validación: verifica que la contraseña tenga al menos 6 caracteres
-    if (password.length < 6) {
+    if (formData.password.length < 6) {
       setError("La contraseña debe tener al menos 6 caracteres");
-      return;
+      return false;
     }
+    return true;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    if (!validateForm()) return;
 
     try {
-      // Realiza la petición POST al endpoint de registro
-      const res = await fetch("http://localhost:3000/auth/register", {
+      // Objeto con los datos que se enviarán al backend
+      const registerData = {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password
+      };
+
+      // Console log para ver el objeto que se envía al backend
+      console.log("Objeto enviado al backend:", registerData);
+
+      const res = await fetch("http://localhost:5000/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify(registerData),
       });
 
       const data = await res.json();
 
-      // Si la respuesta es exitosa, ejecuta los callbacks y muestra alerta
       if (res.ok) {
-        if (onSuccess) {
-          onSuccess(data); // Notifica al padre que el registro fue exitoso
-        }
-        if (onClose) {
-          onClose(); // Cierra el modal
-        }
+        onSuccess?.(data);
+        onClose?.();
         alert("Usuario registrado correctamente");
       } else {
-        // Si hay error, muestra el mensaje del servidor
         setError(data.message || "Error al registrarse");
       }
-    } catch {
-      // Maneja errores de conexión
-      setError("Error de conexión. Por favor, intenta de nuevo.");
+    } catch (error) {
+      console.error("Error al registrar:", error);
+      setError("Error de conexión. Por favor, verifica que el servidor esté corriendo.");
     }
   };
 
   return (
     <>
-      {/* Título del modal */}
       <h2 className={styles["modal-title"]}>Crear Cuenta</h2>
       
-      {/* Formulario de registro */}
       <form onSubmit={handleSubmit} className={styles["login-form"]}>
-        {/* Muestra mensajes de error si existen */}
         {error && <div className={styles["error-message"]}>{error}</div>}
         
-        {/* Campo de nombre */}
         <div className={styles["input-group"]}>
           <input
             type="text"
+            name="name"
             placeholder="Nombre completo"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={formData.name}
+            onChange={handleChange}
             required
             className={styles["form-input"]}
           />
         </div>
 
-        {/* Campo de email */}
         <div className={styles["input-group"]}>
           <input
             type="email"
+            name="email"
             placeholder="Correo electrónico"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={formData.email}
+            onChange={handleChange}
             required
             className={styles["form-input"]}
           />
         </div>
 
-        {/* Campo de contraseña */}
         <div className={styles["input-group"]}>
           <input
             type="password"
+            name="password"
             placeholder="Contraseña"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={formData.password}
+            onChange={handleChange}
             required
             className={styles["form-input"]}
             minLength={6}
           />
         </div>
 
-        {/* Campo de confirmación de contraseña */}
         <div className={styles["input-group"]}>
           <input
             type="password"
+            name="confirmPassword"
             placeholder="Confirmar contraseña"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            value={formData.confirmPassword}
+            onChange={handleChange}
             required
             className={styles["form-input"]}
             minLength={6}
           />
         </div>
 
-        {/* Botón de envío */}
         <button type="submit" className={styles["submit-button"]}>
           Registrarse
         </button>
       </form>
 
-      {/* Pie del modal con enlace a login */}
       <div className={styles["modal-footer"]}>
         <p>
           ¿Ya tienes cuenta?{" "}
@@ -147,7 +148,6 @@ export function RegisterForm({ onSuccess, onClose, onSwitchToLogin }) {
   );
 }
 
-// Componente para la página completa de registro
 export default function Register() {
   return (
     <div>

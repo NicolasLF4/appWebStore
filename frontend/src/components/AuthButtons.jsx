@@ -3,53 +3,29 @@ import styles from '../styles/AuthModal.module.css';
 import { X } from 'lucide-react';
 import { LoginForm } from '../pages/Login';
 
-// Componente que maneja la visualización del modal de login
-// isLogin: si es true, no muestra nada (usuario ya logueado)
-// trigger: elemento personalizado que abre el modal (ej: ícono de usuario)
-// onOpenRegister: función para abrir el modal de registro
 export const AuthButtons = forwardRef(function AuthButtons({ isLogin, trigger, onOpenRegister }, ref) {
-  // Estado para controlar si el modal está abierto o cerrado
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Abre el modal
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
+  const handleOpenModal = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
 
-  // Expone la función de apertura mediante ref
   useImperativeHandle(ref, () => ({
     open: handleOpenModal
   }));
 
-  // Cierra el modal
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
-  // Función para cambiar al modal de registro
   const handleSwitchToRegister = () => {
-    handleCloseModal(); // Cierra el modal de login
+    handleCloseModal();
     if (onOpenRegister) {
-      // Espera un momento para que el modal se cierre antes de abrir el otro
-      setTimeout(() => {
-        onOpenRegister();
-      }, 300);
+      setTimeout(() => onOpenRegister(), 300);
     }
   };
 
-  // Callback que se ejecuta cuando el login es exitoso
   const handleLoginSuccess = (data) => {
-    // Aquí puedes guardar datos en contexto, localStorage, etc.
     console.log("Login exitoso:", data);
   };
 
-  // Si el usuario ya está logueado, no muestra nada
-  if (isLogin) {
-    return <div></div>;
-  }
+  if (isLogin) return null;
 
-  // Determina qué botón usar para abrir el modal
-  // Si hay un trigger personalizado, lo usa; si no, usa el botón por defecto
   const triggerButton = trigger ? (
     <div onClick={handleOpenModal} style={{ cursor: 'pointer' }}>
       {trigger}
@@ -62,23 +38,18 @@ export const AuthButtons = forwardRef(function AuthButtons({ isLogin, trigger, o
 
   return (
     <>
-      {/* Botón que abre el modal */}
       {triggerButton}
 
-      {/* Renderiza el modal solo si está abierto */}
       {isModalOpen && (
         <div 
           className={styles["modal-overlay"]} 
-          onClick={handleCloseModal} // Cierra al hacer clic fuera del modal
+          onClick={handleCloseModal}
         >
-          {/* Contenedor del modal - stopPropagation evita que se cierre al hacer clic dentro */}
           <div className={styles["modal-content"]} onClick={(e) => e.stopPropagation()}>
-            {/* Botón para cerrar el modal */}
             <button className={styles["close-button"]} onClick={handleCloseModal}>
               <X size={24} />
             </button>
             
-            {/* Formulario de login con la lógica del login */}
             <LoginForm 
               onSuccess={handleLoginSuccess} 
               onClose={handleCloseModal}
