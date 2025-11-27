@@ -4,6 +4,7 @@ import { UserRound } from 'lucide-react';
 import { ShoppingCart } from 'lucide-react';
 import { Heart } from 'lucide-react';
 import { HamburgerMenu } from "./HamburgerMenu";
+import { AuthModals } from "./AuthModals";
 
 export const HomeNav = () => {
     return (
@@ -24,7 +25,14 @@ export const HomeNav = () => {
                     {/* Carrito de compras */}
                     <ShoppingCart size={24} className={ styles["cart-icon"]}/>
                     {/* Perfil o inicio de sesion */}   
-                    <UserRound size={24} className={ styles["user-icon"]}/>
+                    <AuthModals 
+                        isLogin={false}
+                        trigger={
+                            <button style={{ background: 'transparent', border: 'none', padding: 0 }}>
+                                <UserRound size={24} className={ styles["user-icon"]}/>
+                            </button>
+                        }
+                    />
                 </div>
             </div>
         </nav>
